@@ -2,13 +2,19 @@ package fr.rli.yatzy;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class YatzyTest {
 
     @Test
-    public void shoud_sum_all_dice_for_a_chance_roll() {
-        assertEquals(15, Yatzy.chance(2, 3, 4, 5, 1));
+    public void should_sum_all_dice_for_a_chance_roll() {
+        DiceRoll rolledDice = new DiceRoll(2, 3, 4, 5, 1);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.chance();
+
+        assertThat(score).isEqualTo(15);
     }
 
     @Test
