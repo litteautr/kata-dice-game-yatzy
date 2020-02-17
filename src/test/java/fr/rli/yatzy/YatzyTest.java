@@ -40,8 +40,22 @@ public class YatzyTest {
 
     @Test
     public void should_sum_all_one_dice_for_a_ones_roll() {
-        assertEquals(2, Yatzy.ones(1, 2, 1, 4, 5));
-        assertEquals(0, Yatzy.ones(6, 2, 2, 4, 5));
+        DiceRoll rolledDice = new DiceRoll(1, 2, 1, 4, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.ones();
+
+        assertThat(score).isEqualTo(2);
+    }
+
+    @Test
+    public void should_score_0_for_a_missed_ones_roll() {
+        DiceRoll rolledDice = new DiceRoll(6, 2, 2, 4, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.ones();
+
+        assertThat(score).isEqualTo(0);
     }
 
     @Test
