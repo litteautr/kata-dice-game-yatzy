@@ -1,21 +1,10 @@
 package fr.rli.yatzy;
 
-import java.util.List;
-
 public class Yatzy {
 
     public static final int YATZY_SCORE = 50;
-    protected int[] dice;
-    private DiceRoll diceRoll;
 
-    public Yatzy(int d1, int d2, int d3, int d4, int _5) {
-        dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = _5;
-    }
+    private DiceRoll diceRoll;
 
     public Yatzy(DiceRoll diceRoll) {
         this.diceRoll = diceRoll;
@@ -30,57 +19,27 @@ public class Yatzy {
     }
 
     public int ones() {
-        return diceRoll.getDiceValues().stream().filter(value -> value == 1).reduce(0, Integer::sum);
+        return diceRoll.sumMatchingDiceForDiceValue(1);
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 2) sum += 2;
-        if (d2 == 2) sum += 2;
-        if (d3 == 2) sum += 2;
-        if (d4 == 2) sum += 2;
-        if (d5 == 2) sum += 2;
-        return sum;
+    public int twos() {
+        return diceRoll.sumMatchingDiceForDiceValue(2);
     }
 
-    public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        int s;
-        s = 0;
-        if (d1 == 3) s += 3;
-        if (d2 == 3) s += 3;
-        if (d3 == 3) s += 3;
-        if (d4 == 3) s += 3;
-        if (d5 == 3) s += 3;
-        return s;
+    public int threes() {
+        return diceRoll.sumMatchingDiceForDiceValue(3);
     }
-
 
     public int fours() {
-        int sum;
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
-        }
-        return sum;
+        return diceRoll.sumMatchingDiceForDiceValue(4);
     }
 
     public int fives() {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++)
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+        return diceRoll.sumMatchingDiceForDiceValue(5);
     }
 
     public int sixes() {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++)
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+        return diceRoll.sumMatchingDiceForDiceValue(6);
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5) {

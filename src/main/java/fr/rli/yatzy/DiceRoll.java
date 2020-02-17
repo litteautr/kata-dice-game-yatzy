@@ -25,6 +25,11 @@ public class DiceRoll {
         return diceValues.stream().distinct().count() == 1;
     }
 
+    public int sumMatchingDiceForDiceValue(int diceValue){
+        return diceValues.stream().filter(value -> value == diceValue).reduce(0, Integer::sum);
+    }
+
+
     public Collection<Integer> getDiceValues() {
         return diceValues;
     }

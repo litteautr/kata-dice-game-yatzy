@@ -60,27 +60,52 @@ public class YatzyTest {
 
     @Test
     public void should_sum_all_two_dice_for_a_twos_roll() {
-        assertEquals(4, Yatzy.twos(1, 2, 3, 2, 6));
+        DiceRoll rolledDice = new DiceRoll(1, 2, 3, 2, 6);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.twos();
+
+        assertThat(score).isEqualTo(4);
     }
 
     @Test
     public void should_sum_all_three_dice_for_a_threes_roll() {
-        assertEquals(6, Yatzy.threes(1, 2, 3, 2, 3));
+        DiceRoll rolledDice = new DiceRoll(1, 2, 3, 2, 3);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.threes();
+
+        assertThat(score).isEqualTo(6);
     }
 
     @Test
     public void should_sum_all_four_dice_for_a_fours_roll() {
-        assertEquals(12, new Yatzy(4, 4, 4, 5, 5).fours());
+        DiceRoll rolledDice = new DiceRoll(4, 4, 4, 5, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.fours();
+
+        assertThat(score).isEqualTo(12);
     }
 
     @Test
     public void should_sum_all_five_dice_for_a_five_roll() {
-        assertEquals(10, new Yatzy(4, 4, 4, 5, 5).fives());
+        DiceRoll rolledDice = new DiceRoll(4, 4, 4, 5, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.fives();
+
+        assertThat(score).isEqualTo(10);
     }
 
     @Test
     public void should_sum_all_six_dice_for_a_sixes_roll() {
-        assertEquals(6, new Yatzy(4, 4, 6, 5, 5).sixes());
+        DiceRoll rolledDice = new DiceRoll(4, 4, 6, 5, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.sixes();
+
+        assertThat(score).isEqualTo(6);
     }
 
     @Test
