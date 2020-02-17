@@ -19,12 +19,22 @@ public class YatzyTest {
 
     @Test
     public void should_score_50_for_a_yatzy_roll() {
-        assertEquals(50, Yatzy.yatzy(4, 4, 4, 4, 4));
+        DiceRoll rolledDice = new DiceRoll(4, 4, 4, 4, 4);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.yatzy();
+
+        assertThat(score).isEqualTo(50);
     }
 
     @Test
-    public void should_score_50_for_a_missed_yatzy_roll() {
-        assertEquals(0, Yatzy.yatzy(6, 6, 6, 6, 3));
+    public void should_score_0_for_a_missed_yatzy_roll() {
+        DiceRoll rolledDice = new DiceRoll(4, 4, 4, 4, 1);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.yatzy();
+
+        assertThat(score).isEqualTo(0);
     }
 
 

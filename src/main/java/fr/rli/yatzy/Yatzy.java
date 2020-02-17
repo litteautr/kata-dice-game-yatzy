@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Yatzy {
 
+    public static final int YATZY_SCORE = 50;
     protected int[] dice;
     private DiceRoll diceRoll;
 
@@ -22,17 +23,10 @@ public class Yatzy {
 
     public int chance() {
         return diceRoll.getDiceValues().stream().reduce(0, Integer::sum);
-
     }
 
-    public static int yatzy(int... dice) {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die - 1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+    public int yatzy() {
+        return diceRoll.allDiceHaveSameNumber() ? YATZY_SCORE : 0;
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {

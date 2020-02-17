@@ -21,6 +21,10 @@ public class DiceRoll {
         }
     }
 
+    public boolean allDiceHaveSameNumber() {
+        return diceValues.stream().distinct().count() == 1;
+    }
+
     public Collection<Integer> getDiceValues() {
         return diceValues;
     }
