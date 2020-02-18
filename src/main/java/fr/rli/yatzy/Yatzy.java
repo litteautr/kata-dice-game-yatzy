@@ -8,6 +8,8 @@ public class Yatzy {
     public static final int MISSED_ROLL_SCORE = 0;
     public static final int SMALL_STRAIGHT_SCORE = 15;
     public static final int LARGE_STRAIGHT_SCORE = 20;
+    public static final String SMALL_STAIGHT_VALUE = "12345";
+    public static final String LARGE_STAIGHT_VALUE = "23456";
 
     private DiceRoll diceRoll;
 
@@ -79,26 +81,11 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        String orderedRoll = diceRoll.getDiceValues().stream().sorted().map(String::valueOf)
-                .collect(Collectors.joining());
-
-        if ("12345".equals(orderedRoll)) {
-            return SMALL_STRAIGHT_SCORE;
-        }
-        return MISSED_ROLL_SCORE;
+        return SMALL_STAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? SMALL_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
     }
 
     public int largeStraight() {
-        int[] countDiceByValue = diceRoll.countDiceByValue();
-
-        if (countDiceByValue[1] == 1 &&
-                countDiceByValue[2] == 1 &&
-                countDiceByValue[3] == 1 &&
-                countDiceByValue[4] == 1
-                && countDiceByValue[5] == 1) {
-            return LARGE_STRAIGHT_SCORE;
-        }
-        return MISSED_ROLL_SCORE;
+        return LARGE_STAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? LARGE_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
     }
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {

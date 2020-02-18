@@ -2,6 +2,7 @@ package fr.rli.yatzy;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.text.MessageFormat.format;
 
@@ -35,6 +36,11 @@ public class DiceRoll {
         diceValues.forEach(diceValue -> countDiceByValue[diceValue - 1]++);
 
         return countDiceByValue;
+    }
+
+    public String toOrderedString() {
+        return diceValues.stream().sorted().map(String::valueOf)
+                .collect(Collectors.joining());
     }
 
     public Collection<Integer> getDiceValues() {
