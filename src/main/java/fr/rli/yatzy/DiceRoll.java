@@ -25,10 +25,17 @@ public class DiceRoll {
         return diceValues.stream().distinct().count() == 1;
     }
 
-    public int sumMatchingDiceForDiceValue(int diceValue){
+    public int sumMatchingDiceForDiceValue(int diceValue) {
         return diceValues.stream().filter(value -> value == diceValue).reduce(0, Integer::sum);
     }
 
+    public int[] countDiceByValue() {
+        int[] countDiceByValue = new int[MAXIMUM_DICE_VALUE];
+
+        diceValues.forEach(diceValue -> countDiceByValue[diceValue - 1]++);
+
+        return countDiceByValue;
+    }
 
     public Collection<Integer> getDiceValues() {
         return diceValues;

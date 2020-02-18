@@ -44,12 +44,10 @@ public class Yatzy {
     }
 
     public int pair() {
-        int[] countOccurenceByValue = new int[6];
-
-        diceRoll.getDiceValues().forEach(diceValue -> countOccurenceByValue[diceValue - 1]++);
+        int[] countDiceByValue = diceRoll.countDiceByValue();
 
         for (int i = 6; i > 0; i--) {
-            if (countOccurenceByValue[i - 1] >= 2) {
+            if (countDiceByValue[i - 1] >= 2) {
                 return i * 2;
             }
         }
@@ -77,12 +75,10 @@ public class Yatzy {
     }
 
     public int threeOfAKind() {
-        int[] countOccurenceByValue = new int[6];
-
-        diceRoll.getDiceValues().forEach(diceValue -> countOccurenceByValue[diceValue - 1]++);
+        int[] countDiceByValue = diceRoll.countDiceByValue();
 
         for (int i = 6; i > 0; i--) {
-            if (countOccurenceByValue[i - 1] >= 3) {
+            if (countDiceByValue[i - 1] >= 3) {
                 return i * 3;
             }
         }
@@ -90,12 +86,10 @@ public class Yatzy {
     }
 
     public int fourOfAKind() {
-        int[] countOccurenceByValue = new int[6];
-
-        diceRoll.getDiceValues().forEach(diceValue -> countOccurenceByValue[diceValue - 1]++);
+        int[] countDiceByValue = diceRoll.countDiceByValue();
 
         for (int i = 6; i > 0; i--) {
-            if (countOccurenceByValue[i - 1] >= 4) {
+            if (countDiceByValue[i - 1] >= 4) {
                 return i * 4;
             }
         }
