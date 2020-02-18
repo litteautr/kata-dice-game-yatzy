@@ -190,12 +190,22 @@ public class YatzyTest {
 
     @Test
     public void should_score_15_for_a_small_straight_roll() {
-        assertEquals(15, Yatzy.smallStraight(2, 3, 4, 5, 1));
+        DiceRoll rolledDice = new DiceRoll(2, 3, 4, 5, 1);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.smallStraight();
+
+        assertThat(score).isEqualTo(15);
     }
 
     @Test
     public void should_score_0_for_a_missed_small_straight_roll() {
-        assertEquals(0, Yatzy.smallStraight(1, 2, 2, 4, 5));
+        DiceRoll rolledDice = new DiceRoll(1, 2, 2, 4, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.smallStraight();
+
+        assertThat(score).isEqualTo(0);
     }
 
     @Test
