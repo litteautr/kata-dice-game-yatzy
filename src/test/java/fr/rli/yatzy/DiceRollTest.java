@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DiceRollTest {
 
@@ -46,7 +45,7 @@ public class DiceRollTest {
 
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
-        Assertions.assertArrayEquals(new int[]{2, 1, 1, 1, 0, 0}, countDiceByValue);
+        assertArrayEquals(new int[]{2, 1, 1, 1, 0, 0}, countDiceByValue);
     }
 
     @Test

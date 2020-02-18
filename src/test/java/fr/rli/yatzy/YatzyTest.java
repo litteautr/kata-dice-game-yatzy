@@ -129,6 +129,16 @@ public class YatzyTest {
     }
 
     @Test
+    public void should_sum_highest_dice_value_for_a_pair_roll() {
+        DiceRoll rolledDice = new DiceRoll(5, 3, 6, 6, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.score(PAIR);
+
+        assertThat(score).isEqualTo(12);
+    }
+
+    @Test
     public void should_sum_the_four_matching_dice_for_a_two_pair_roll() {
         DiceRoll rolledDice = new DiceRoll(3, 3, 5, 4, 5);
         Yatzy yatzy = new Yatzy(rolledDice);

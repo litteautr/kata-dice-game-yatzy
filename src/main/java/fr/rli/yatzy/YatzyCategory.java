@@ -21,7 +21,7 @@ public enum YatzyCategory {
     SMALL_STRAIGHT(diceRoll -> SMALL_STRAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? SMALL_STRAIGHT_SCORE : MISSED_ROLL_SCORE),
     LARGE_STRAIGHT(diceRoll -> LARGE_STRAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? LARGE_STRAIGHT_SCORE : MISSED_ROLL_SCORE),
     YATZY(diceRoll -> diceRoll.allDiceHaveSameNumber() ? YATZY_SCORE : MISSED_ROLL_SCORE),
-    CHANCE(diceRoll -> diceRoll.getDiceValues().stream().reduce(0, Integer::sum));
+    CHANCE(diceRoll -> diceRoll.sumAllDice());
 
     private final ToIntFunction<DiceRoll> scoringRule;
 
@@ -33,7 +33,7 @@ public enum YatzyCategory {
         return scoringRule.applyAsInt(diceRoll);
     }
 
-    private static Integer calculateScoreForMatchingDice(DiceRoll diceRoll, int nbOfOccurence) {
+    private static int calculateScoreForMatchingDice(DiceRoll diceRoll, int nbOfOccurence) {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
         for (int currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
@@ -45,7 +45,7 @@ public enum YatzyCategory {
         return MISSED_ROLL_SCORE;
     }
 
-    private static Integer calculateScoreForTwoPair(DiceRoll diceRoll) {
+    private static int calculateScoreForTwoPair(DiceRoll diceRoll) {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
         int numberOfPairFound = 0;

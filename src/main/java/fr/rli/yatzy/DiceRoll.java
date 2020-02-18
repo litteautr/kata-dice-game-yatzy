@@ -23,11 +23,15 @@ public class DiceRoll {
     }
 
     public boolean allDiceHaveSameNumber() {
-        return diceValues.stream().distinct().count() == 1;
+        return diceValues.stream()
+                .distinct()
+                .count() == 1;
     }
 
     public int sumMatchingDiceForDiceValue(int diceValue) {
-        return diceValues.stream().filter(value -> value == diceValue).reduce(0, Integer::sum);
+        return diceValues.stream()
+                .filter(value -> value == diceValue)
+                .reduce(0, Integer::sum);
     }
 
     public int[] countDiceByValue() {
@@ -39,8 +43,14 @@ public class DiceRoll {
     }
 
     public String toOrderedString() {
-        return diceValues.stream().sorted().map(String::valueOf)
+        return diceValues.stream()
+                .sorted()
+                .map(String::valueOf)
                 .collect(Collectors.joining());
+    }
+
+    public int sumAllDice() {
+        return diceValues.stream().reduce(0, Integer::sum);
     }
 
     public Collection<Integer> getDiceValues() {
