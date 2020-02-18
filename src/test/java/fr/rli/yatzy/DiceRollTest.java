@@ -1,6 +1,9 @@
 package fr.rli.yatzy;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,4 +30,33 @@ public class DiceRollTest {
 
         assertTrue(diceRoll.allDiceHaveSameNumber());
     }
+
+    @Test
+    public void should_return_sum_of_matching_dice_for_a_dice_value() {
+        DiceRoll diceRoll = new DiceRoll(1, 4, 1, 3, 1);
+
+        int sum = diceRoll.sumMatchingDiceForDiceValue(1);
+
+        assertThat(sum).isEqualTo(3);
+    }
+
+    @Test
+    public void should_return_an_array_counting_number_of_dice_by_value() {
+        DiceRoll diceRoll = new DiceRoll(1, 4, 2, 3, 1);
+
+        int[] countDiceByValue = diceRoll.countDiceByValue();
+
+        Assertions.assertArrayEquals(new int[]{2, 1, 1, 1, 0, 0}, countDiceByValue);
+    }
+
+    @Test
+    public void should_convert_dice_roll_to_an_ordered_string() {
+        DiceRoll diceRoll = new DiceRoll(1, 4, 2, 3, 1);
+
+        String diceRollAsString = diceRoll.toOrderedString();
+
+        assertThat(diceRollAsString).isEqualTo("11234");
+    }
+
+
 }
