@@ -44,13 +44,26 @@ public class Yatzy {
     }
 
     public int pair() {
+        return calculateScoreForMatchingDice(2);
+    }
+
+    public int threeOfAKind() {
+        return calculateScoreForMatchingDice(3);
+    }
+
+    public int fourOfAKind() {
+        return calculateScoreForMatchingDice(4);
+    }
+
+    private Integer calculateScoreForMatchingDice(int nbOfOccurence) {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
         for (int i = 6; i > 0; i--) {
-            if (countDiceByValue[i - 1] >= 2) {
-                return i * 2;
+            if (countDiceByValue[i - 1] >= nbOfOccurence) {
+                return i * nbOfOccurence;
             }
         }
+
         return MISSED_ROLL_SCORE;
     }
 
@@ -72,28 +85,6 @@ public class Yatzy {
             return score * 2;
         else
             return 0;
-    }
-
-    public int threeOfAKind() {
-        int[] countDiceByValue = diceRoll.countDiceByValue();
-
-        for (int i = 6; i > 0; i--) {
-            if (countDiceByValue[i - 1] >= 3) {
-                return i * 3;
-            }
-        }
-        return MISSED_ROLL_SCORE;
-    }
-
-    public int fourOfAKind() {
-        int[] countDiceByValue = diceRoll.countDiceByValue();
-
-        for (int i = 6; i > 0; i--) {
-            if (countDiceByValue[i - 1] >= 4) {
-                return i * 4;
-            }
-        }
-        return MISSED_ROLL_SCORE;
     }
 
 
