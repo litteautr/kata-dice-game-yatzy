@@ -140,22 +140,42 @@ public class YatzyTest {
 
     @Test
     public void should_sum_the_three_matching_dice_for_a_three_of_a_kind_roll() {
-        assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 4, 5));
+        DiceRoll rolledDice = new DiceRoll(3, 3, 3, 4, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.threeOfAKind();
+
+        assertThat(score).isEqualTo(9);
     }
 
     @Test
     public void should_score_0_for_a_missed_three_of_a_kind_roll() {
-        assertEquals(0, Yatzy.three_of_a_kind(1, 3, 4, 6, 5));
+        DiceRoll rolledDice = new DiceRoll(1, 3, 4, 6, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.threeOfAKind();
+
+        assertThat(score).isEqualTo(0);
     }
 
     @Test
     public void should_sum_the_four_matching_dice_for_a_four_of_a_kind_roll() {
-        assertEquals(12, Yatzy.four_of_a_kind(3, 3, 3, 3, 5));
+        DiceRoll rolledDice = new DiceRoll(3, 3, 3, 3, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.fourOfAKind();
+
+        assertThat(score).isEqualTo(12);
     }
 
     @Test
     public void should_score_0_for_a_missed_four_of_a_kind_roll() {
-        assertEquals(0, Yatzy.four_of_a_kind(1, 3, 4, 6, 5));
+        DiceRoll rolledDice = new DiceRoll(1, 3, 4, 6, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.fourOfAKind();
+
+        assertThat(score).isEqualTo(0);
     }
 
     @Test
