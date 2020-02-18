@@ -8,13 +8,17 @@ public class Yatzy {
     public static final int MISSED_ROLL_SCORE = 0;
     public static final int SMALL_STRAIGHT_SCORE = 15;
     public static final int LARGE_STRAIGHT_SCORE = 20;
-    public static final String SMALL_STAIGHT_VALUE = "12345";
-    public static final String LARGE_STAIGHT_VALUE = "23456";
+    public static final String SMALL_STRAIGHT_VALUE = "12345";
+    public static final String LARGE_STRAIGHT_VALUE = "23456";
 
     private DiceRoll diceRoll;
 
     public Yatzy(DiceRoll diceRoll) {
         this.diceRoll = diceRoll;
+    }
+
+    public int score(YatzyCategory category) {
+        return category.score(diceRoll);
     }
 
     public int chance() {
@@ -81,11 +85,11 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        return SMALL_STAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? SMALL_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
+        return SMALL_STRAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? SMALL_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
     }
 
     public int largeStraight() {
-        return LARGE_STAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? LARGE_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
+        return LARGE_STRAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? LARGE_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
     }
 
     public int fullHouse() {

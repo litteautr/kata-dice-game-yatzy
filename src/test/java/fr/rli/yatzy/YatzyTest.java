@@ -2,6 +2,7 @@ package fr.rli.yatzy;
 
 import org.junit.jupiter.api.Test;
 
+import static fr.rli.yatzy.YatzyCategory.ONES;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -43,7 +44,7 @@ public class YatzyTest {
         DiceRoll rolledDice = new DiceRoll(1, 2, 1, 4, 5);
         Yatzy yatzy = new Yatzy(rolledDice);
 
-        int score = yatzy.ones();
+        int score = yatzy.score(ONES);
 
         assertThat(score).isEqualTo(2);
     }
@@ -53,7 +54,7 @@ public class YatzyTest {
         DiceRoll rolledDice = new DiceRoll(6, 2, 2, 4, 5);
         Yatzy yatzy = new Yatzy(rolledDice);
 
-        int score = yatzy.ones();
+        int score = yatzy.score(ONES);
 
         assertThat(score).isEqualTo(0);
     }
