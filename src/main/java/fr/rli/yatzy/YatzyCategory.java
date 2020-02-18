@@ -2,6 +2,9 @@ package fr.rli.yatzy;
 
 import java.util.function.ToIntFunction;
 
+import static fr.rli.yatzy.DiceRoll.MAXIMUM_DICE_VALUE;
+import static fr.rli.yatzy.Yatzy.*;
+
 public enum YatzyCategory {
 
     ONES(diceRoll -> diceRoll.sumMatchingDiceForDiceValue(1)),
@@ -15,12 +18,10 @@ public enum YatzyCategory {
     THREE_OF_A_KIND(diceRoll -> calculateScoreForMatchingDice(diceRoll, 3)),
     FOUR_OF_A_KIND(diceRoll -> calculateScoreForMatchingDice(diceRoll, 4)),
     FULL_HOUSE(YatzyCategory::calculateScoreFullHouse),
-    SMALL_STRAIGHT(diceRoll -> "12345".equals(diceRoll.toOrderedString()) ? 15 : 0),
-    LARGE_STRAIGHT(diceRoll -> "23456".equals(diceRoll.toOrderedString()) ? 20 : 0),
-    YATZY(diceRoll -> diceRoll.allDiceHaveSameNumber() ? 50 : 0),
+    SMALL_STRAIGHT(diceRoll -> SMALL_STRAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? SMALL_STRAIGHT_SCORE : MISSED_ROLL_SCORE),
+    LARGE_STRAIGHT(diceRoll -> LARGE_STRAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? LARGE_STRAIGHT_SCORE : MISSED_ROLL_SCORE),
+    YATZY(diceRoll -> diceRoll.allDiceHaveSameNumber() ? YATZY_SCORE : MISSED_ROLL_SCORE),
     CHANCE(diceRoll -> diceRoll.getDiceValues().stream().reduce(0, Integer::sum));
-
-    public static final int MISSED_ROLL_SCORE = 0;
 
     private final ToIntFunction<DiceRoll> scoringRule;
 
@@ -35,7 +36,7 @@ public enum YatzyCategory {
     private static Integer calculateScoreForMatchingDice(DiceRoll diceRoll, int nbOfOccurence) {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
-        for (int currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+        for (int currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
             if (countDiceByValue[currentDiceValue - 1] >= nbOfOccurence) {
                 return currentDiceValue * nbOfOccurence;
             }
@@ -49,7 +50,7 @@ public enum YatzyCategory {
 
         int numberOfPairFound = 0;
         int score = 0;
-        for (int currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+        for (int currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
             if (countDiceByValue[currentDiceValue - 1] >= 2) {
                 numberOfPairFound++;
                 score += currentDiceValue;
@@ -63,7 +64,6 @@ public enum YatzyCategory {
         }
     }
 
-
     public static int calculateScoreFullHouse(DiceRoll diceRoll) {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
@@ -73,14 +73,14 @@ public enum YatzyCategory {
         int threeOfAKindMatchingDice = 0;
         int currentDiceValue;
 
-        for (currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+        for (currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
             if (countDiceByValue[currentDiceValue - 1] == 2) {
                 pairFound = true;
                 pairMatchingDice = currentDiceValue;
             }
         }
 
-        for (currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+        for (currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
             if (countDiceByValue[currentDiceValue - 1] == 3) {
                 threeOfAKindFound = true;
                 threeOfAKindMatchingDice = currentDiceValue;
