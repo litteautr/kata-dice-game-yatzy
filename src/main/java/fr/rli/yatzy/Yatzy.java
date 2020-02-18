@@ -1,5 +1,7 @@
 package fr.rli.yatzy;
 
+import java.util.stream.Collectors;
+
 public class Yatzy {
 
     public static final int YATZY_SCORE = 50;
@@ -77,13 +79,10 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        int[] countDiceByValue = diceRoll.countDiceByValue();
+        String orderedRoll = diceRoll.getDiceValues().stream().sorted().map(String::valueOf)
+                .collect(Collectors.joining());
 
-        if (countDiceByValue[0] == 1 &&
-                countDiceByValue[1] == 1 &&
-                countDiceByValue[2] == 1 &&
-                countDiceByValue[3] == 1 &&
-                countDiceByValue[4] == 1) {
+        if ("12345".equals(orderedRoll)) {
             return SMALL_STRAIGHT_SCORE;
         }
         return MISSED_ROLL_SCORE;
