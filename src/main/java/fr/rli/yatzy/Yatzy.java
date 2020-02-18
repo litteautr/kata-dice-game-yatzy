@@ -5,6 +5,7 @@ public class Yatzy {
     public static final int YATZY_SCORE = 50;
     public static final int MISSED_ROLL_SCORE = 0;
     public static final int SMALL_STRAIGHT_SCORE = 15;
+    public static final int LARGE_STRAIGHT_SCORE = 20;
 
     private DiceRoll diceRoll;
 
@@ -75,7 +76,6 @@ public class Yatzy {
         }
     }
 
-
     public int smallStraight() {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
@@ -89,21 +89,17 @@ public class Yatzy {
         return MISSED_ROLL_SCORE;
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
-        if (tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1
-                && tallies[5] == 1)
-            return 20;
-        return 0;
+    public int largeStraight() {
+        int[] countDiceByValue = diceRoll.countDiceByValue();
+
+        if (countDiceByValue[1] == 1 &&
+                countDiceByValue[2] == 1 &&
+                countDiceByValue[3] == 1 &&
+                countDiceByValue[4] == 1
+                && countDiceByValue[5] == 1) {
+            return LARGE_STRAIGHT_SCORE;
+        }
+        return MISSED_ROLL_SCORE;
     }
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
