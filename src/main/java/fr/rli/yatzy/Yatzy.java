@@ -55,36 +55,23 @@ public class Yatzy {
         return calculateScoreForMatchingDice(4);
     }
 
-    private Integer calculateScoreForMatchingDice(int nbOfOccurence) {
+    public int twoPair() {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
+        int numberOfPairFound = 0;
+        int score = 0;
         for (int i = 6; i > 0; i--) {
-            if (countDiceByValue[i - 1] >= nbOfOccurence) {
-                return i * nbOfOccurence;
+            if (countDiceByValue[i - 1] >= 2) {
+                numberOfPairFound++;
+                score += i;
             }
         }
 
-        return MISSED_ROLL_SCORE;
-    }
-
-    public static int two_pair(int d1, int d2, int d3, int d4, int d5) {
-        int[] counts = new int[6];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
-        int n = 0;
-        int score = 0;
-        for (int i = 0; i < 6; i += 1)
-            if (counts[6 - i - 1] >= 2) {
-                n++;
-                score += (6 - i);
-            }
-        if (n == 2)
-            return score * 2;
-        else
-            return 0;
+        if (numberOfPairFound == 2) {
+            return score * numberOfPairFound;
+        } else {
+            return MISSED_ROLL_SCORE;
+        }
     }
 
 
@@ -154,6 +141,18 @@ public class Yatzy {
             return _2_at * 2 + _3_at * 3;
         else
             return 0;
+    }
+
+    private Integer calculateScoreForMatchingDice(int nbOfOccurence) {
+        int[] countDiceByValue = diceRoll.countDiceByValue();
+
+        for (int i = 6; i > 0; i--) {
+            if (countDiceByValue[i - 1] >= nbOfOccurence) {
+                return i * nbOfOccurence;
+            }
+        }
+
+        return MISSED_ROLL_SCORE;
     }
 }
 

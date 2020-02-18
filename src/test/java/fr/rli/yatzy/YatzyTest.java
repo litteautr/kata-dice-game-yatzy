@@ -130,12 +130,22 @@ public class YatzyTest {
 
     @Test
     public void should_sum_the_four_matching_dice_for_a_two_pair_roll() {
-        assertEquals(16, Yatzy.two_pair(3, 3, 5, 4, 5));
+        DiceRoll rolledDice = new DiceRoll(3, 3, 5, 4, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.twoPair();
+
+        assertThat(score).isEqualTo(16);
     }
 
     @Test
     public void should_score_0_for_a_missed_two_pair_roll() {
-        assertEquals(0, Yatzy.two_pair(3, 1, 5, 5, 5));
+        DiceRoll rolledDice = new DiceRoll(3, 1, 5, 5, 5);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.twoPair();
+
+        assertThat(score).isEqualTo(0);
     }
 
     @Test
