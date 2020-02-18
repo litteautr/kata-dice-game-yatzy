@@ -66,10 +66,10 @@ public class Yatzy {
 
         int numberOfPairFound = 0;
         int score = 0;
-        for (int i = 6; i > 0; i--) {
-            if (countDiceByValue[i - 1] >= 2) {
+        for (int currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+            if (countDiceByValue[currentDiceValue - 1] >= 2) {
                 numberOfPairFound++;
-                score += i;
+                score += currentDiceValue;
             }
         }
 
@@ -88,46 +88,42 @@ public class Yatzy {
         return LARGE_STAIGHT_VALUE.equals(diceRoll.toOrderedString()) ? LARGE_STRAIGHT_SCORE : MISSED_ROLL_SCORE;
     }
 
-    public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies;
-        boolean _2 = false;
-        int i;
-        int _2_at = 0;
-        boolean _3 = false;
-        int _3_at = 0;
+    public int fullHouse() {
+        int[] countDiceByValue = diceRoll.countDiceByValue();
 
+        boolean pairFound = false;
+        boolean threeOfAKindFound = false;
+        int pairMatchingDice = 0;
+        int threeOfAKindMatchingDice = 0;
+        int currentDiceValue;
 
-        tallies = new int[6];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
-
-        for (i = 0; i != 6; i += 1)
-            if (tallies[i] == 2) {
-                _2 = true;
-                _2_at = i + 1;
+        for (currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+            if (countDiceByValue[currentDiceValue - 1] == 2) {
+                pairFound = true;
+                pairMatchingDice = currentDiceValue;
             }
+        }
 
-        for (i = 0; i != 6; i += 1)
-            if (tallies[i] == 3) {
-                _3 = true;
-                _3_at = i + 1;
+        for (currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+            if (countDiceByValue[currentDiceValue - 1] == 3) {
+                threeOfAKindFound = true;
+                threeOfAKindMatchingDice = currentDiceValue;
             }
+        }
 
-        if (_2 && _3)
-            return _2_at * 2 + _3_at * 3;
-        else
-            return 0;
+        if (pairFound && threeOfAKindFound) {
+            return pairMatchingDice * 2 + threeOfAKindMatchingDice * 3;
+        } else {
+            return MISSED_ROLL_SCORE;
+        }
     }
 
     private Integer calculateScoreForMatchingDice(int nbOfOccurence) {
         int[] countDiceByValue = diceRoll.countDiceByValue();
 
-        for (int i = 6; i > 0; i--) {
-            if (countDiceByValue[i - 1] >= nbOfOccurence) {
-                return i * nbOfOccurence;
+        for (int currentDiceValue = 6; currentDiceValue > 0; currentDiceValue--) {
+            if (countDiceByValue[currentDiceValue - 1] >= nbOfOccurence) {
+                return currentDiceValue * nbOfOccurence;
             }
         }
 

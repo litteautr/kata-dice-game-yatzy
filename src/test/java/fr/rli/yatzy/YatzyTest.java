@@ -230,11 +230,21 @@ public class YatzyTest {
 
     @Test
     public void should_sum_all_dice_for_a_full_house_roll() {
-        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6));
+        DiceRoll rolledDice = new DiceRoll(6, 2, 2, 2, 6);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.fullHouse();
+
+        assertThat(score).isEqualTo(18);
     }
 
     @Test
     public void should_score_0_for_a_missed_full_house_roll() {
-        assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6));
+        DiceRoll rolledDice = new DiceRoll(2, 3, 4, 5, 6);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.fullHouse();
+
+        assertThat(score).isEqualTo(0);
     }
 }
