@@ -56,28 +56,18 @@ public enum YatzyCategory {
 
         boolean pairFound = false;
         boolean threeOfAKindFound = false;
-        int pairMatchingDice = 0;
-        int threeOfAKindMatchingDice = 0;
-        int currentDiceValue;
+        int score = 0;
 
-        for (currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
+        for (int currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
             if (countDiceByValue[currentDiceValue - 1] == 2) {
                 pairFound = true;
-                pairMatchingDice = currentDiceValue;
-            }
-        }
-
-        for (currentDiceValue = MAXIMUM_DICE_VALUE; currentDiceValue > 0; currentDiceValue--) {
-            if (countDiceByValue[currentDiceValue - 1] == 3) {
+                score += currentDiceValue * 2;
+            } else if (countDiceByValue[currentDiceValue - 1] == 3) {
                 threeOfAKindFound = true;
-                threeOfAKindMatchingDice = currentDiceValue;
+                score += currentDiceValue * 3;
             }
         }
 
-        if (pairFound && threeOfAKindFound) {
-            return pairMatchingDice * 2 + threeOfAKindMatchingDice * 3;
-        } else {
-            return MISSED_ROLL_SCORE;
-        }
+        return pairFound && threeOfAKindFound ? score : MISSED_ROLL_SCORE;
     }
 }

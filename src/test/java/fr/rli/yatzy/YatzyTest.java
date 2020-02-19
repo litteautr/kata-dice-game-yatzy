@@ -249,6 +249,16 @@ public class YatzyTest {
     }
 
     @Test
+    public void should_score_0_for_yatzy_on_a_full_house_roll() {
+        DiceRoll rolledDice = new DiceRoll(1, 1, 1, 1, 1);
+        Yatzy yatzy = new Yatzy(rolledDice);
+
+        int score = yatzy.score(FULL_HOUSE);
+
+        assertThat(score).isEqualTo(0);
+    }
+
+    @Test
     public void should_score_0_for_a_missed_full_house_roll() {
         DiceRoll rolledDice = new DiceRoll(2, 3, 4, 5, 6);
         Yatzy yatzy = new Yatzy(rolledDice);
