@@ -9,7 +9,7 @@ public class Yatzy {
     public static final String SMALL_STRAIGHT_VALUE = "12345";
     public static final String LARGE_STRAIGHT_VALUE = "23456";
 
-    private DiceRoll diceRoll;
+    private final DiceRoll diceRoll;
 
     public Yatzy(DiceRoll diceRoll) {
         this.diceRoll = diceRoll;

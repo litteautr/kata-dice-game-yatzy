@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 import static java.text.MessageFormat.format;
 
-public class DiceRoll {
+public final class DiceRoll {
 
     public static final int MINIMUM_DICE_VALUE = 1;
     public static final int MAXIMUM_DICE_VALUE = 6;
 
-    private List<Integer> diceValues;
+    private final List<Integer> diceValues;
 
     public DiceRoll(int diceValue1, int diceValue2, int diceValue3, int diceValue4, int diceValue5) {
         diceValues = List.of(diceValue1, diceValue2, diceValue3, diceValue4, diceValue5);

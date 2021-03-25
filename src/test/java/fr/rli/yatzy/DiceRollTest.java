@@ -53,6 +53,4 @@ public class DiceRollTest {
 
         assertThat(diceRollAsString).isEqualTo("11234");
     }
-
-
 }
